@@ -6,7 +6,7 @@
 /*   By: ancourt <ancourt@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 14:32:13 by ancourt           #+#    #+#             */
-/*   Updated: 2026/05/20 16:29:13 by ancourt          ###   ########.fr       */
+/*   Updated: 2026/05/20 16:36:47 by ancourt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,21 @@ int check_args(int ac, char **av)
             return (error_message("Non numerical arguments or negative intergers rejected."));
     }
     return (0);
+}
+
+int *get_args(char **av)
+{
+    int *tab;
+    int i;
+
+    tab = malloc(7 * sizeof(int));
+    if (!tab)
+        return (NULL);
+    i = 0;
+    while (i < 7)
+    {
+        tab[i] = ft_atoi(av[i + 1]);
+        i++;
+    }
+    return (tab);
 }
