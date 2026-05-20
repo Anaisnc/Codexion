@@ -6,7 +6,7 @@
 /*   By: ancourt <ancourt@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 14:32:13 by ancourt           #+#    #+#             */
-/*   Updated: 2026/05/20 16:23:07 by ancourt          ###   ########.fr       */
+/*   Updated: 2026/05/20 16:29:13 by ancourt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,16 @@ int check_args(int ac, char **av)
     int i;
 
     if (ac != 9)
-        return (error_message("Number of arguments is not 8"));
+        return (error_message("Number of arguments is not 8."));
     if (!(is_fifo_or_edf(av[8])))
-        return (error_message("scheduler rejected"));
+        return (error_message("Scheduler rejected."));
     i = 1;
     while (i < 8)
     {
         if (is_numeric(av[i]))
             i++;
         else
-            return (error_message("Non numerical arguments rejected"));
+            return (error_message("Non numerical arguments or negative intergers rejected."));
     }
     return (0);
 }
