@@ -6,7 +6,7 @@
 /*   By: ancourt <ancourt@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 16:10:36 by ancourt           #+#    #+#             */
-/*   Updated: 2026/05/20 16:23:02 by ancourt          ###   ########.fr       */
+/*   Updated: 2026/05/23 12:17:44 by ancourt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,28 +41,40 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
-int	ft_atoi(const char *nptr)
+long	ft_atol(const char *str)
 {
-	size_t	i;
-	int		result;
+	long	result;
 	int		sign;
 
-	i = 0;
 	result = 0;
 	sign = 1;
-	while (nptr[i] == ' ' || (nptr[i] >= '\t' && nptr[i] <= '\r'))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		if (nptr[i] == '-')
-			sign = -sign;
-		i++;
+		if (*str == '-')
+			sign = -1;
+		str++;
 	}
-	while (nptr[i] >= '0' && nptr[i] <= '9')
+	while (*str >= '0' && *str <= '9')
 	{
-		result = result * 10 + (nptr[i] - '0');
-		i++;
+		result = result * 10 + (*str - '0');
+		str++;
 	}
 	return (result * sign);
+}
+
+int	validate_long_tab(long *tab)
+{
+	int	i;
+
+	i = 0;
+	while (i < 7)
+	{
+		if (tab[i] > 2147483647)
+			return (1);
+		i++;
+	}
+	return (0);
 }
 

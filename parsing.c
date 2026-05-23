@@ -6,7 +6,7 @@
 /*   By: ancourt <ancourt@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 14:32:13 by ancourt           #+#    #+#             */
-/*   Updated: 2026/05/20 16:49:12 by ancourt          ###   ########.fr       */
+/*   Updated: 2026/05/23 12:19:43 by ancourt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,47 @@ int check_args(int ac, char **av)
     return (0);
 }
 
-int *get_args(char **av)
+static long	*get_long_tab(char **av)
 {
-    int *tab;
-    int i;
+	long	*tab;
+	int		i;
 
-    tab = malloc(7 * sizeof(int));
-    if (!tab)
-        return (NULL);
-    i = 0;
-    while (i < 7)
-    {
-        tab[i] = ft_atoi(av[i + 1]);
-        i++;
-    }
-    return (tab);
+	tab = malloc(7 * sizeof(long));
+	if (!tab)
+		return (NULL);
+	i = 0;
+	while (i < 7)
+	{
+		tab[i] = ft_atol(av[i + 1]);
+		i++;
+	}
+	return (tab);
+}
+
+int	*get_args(char **av)
+{
+	long	*tab_long;
+	int		*tab;
+	int		i;
+
+	tab_long = get_long_tab(av);
+	if (!tab_long || validate_long_tab(tab_long))
+	{
+		free(tab_long);
+		return (NULL);
+	}
+	tab = malloc(7 * sizeof(int));
+	if (!tab)
+	{
+		free(tab_long);
+		return (NULL);
+	}
+	i = 0;
+	while (i < 7)
+	{
+    	tab[i] = (int)tab_long[i];
+    	i++;
+	}
+	free(tab_long);
+	return (tab);
 }
